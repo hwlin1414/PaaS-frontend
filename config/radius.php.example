@@ -1,0 +1,8 @@
+<?php
+
+return [
+    'hostname' => 'RADIUS_IP',
+    'port' => RADIUS_PORT,
+    'secret' => 'RADIUS_SECRET',
+    'timeout' => 5,
+];
