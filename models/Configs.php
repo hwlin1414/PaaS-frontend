@@ -45,4 +45,12 @@ class Configs extends \yii\db\ActiveRecord
             'value' => 'Value',
         ];
     }
+
+    public function scenarios()
+    {
+        return [
+            'default' => ['key', 'value'],
+            'update' => ['value'],
+        ];
+    }
 }

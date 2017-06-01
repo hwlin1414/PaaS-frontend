@@ -39,43 +39,20 @@ class ConfigsController extends Controller
      */
     public function actionIndex()
     {
+        $model = new Configs();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::warning("系統設定新增：('{$model->key}', '{$model->value}')", 'app\configs\create');
+        }
+
         $searchModel = new ConfigsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setSort(['defaultOrder' => ['key' => SORT_ASC]]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model' => $model,
         ]);
-    }
-
-    /**
-     * Displays a single Configs model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
-     * Creates a new Configs model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Configs();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
     }
 
     /**
@@ -87,9 +64,11 @@ class ConfigsController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->setScenario('update');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            Yii::warning("系統設定更新：('{$model->key}', '{$model->value}')", 'app\configs\update');
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -105,7 +84,9 @@ class ConfigsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        Yii::warning("系統設定刪除：('{$model->key}', '{$model->value}')", 'app\configs\delete');
+        $model->delete();
 
         return $this->redirect(['index']);
     }
