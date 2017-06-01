@@ -61,4 +61,14 @@ class Groups extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Users::className(), ['group_id' => 'id']);
     }
+    public function hasPermission($controller, $action)
+    {
+        $data = intval(GroupPerms::find()
+            ->where(['group_id' => $this->id, 'permission' => $controller.'/'.$action])
+            ->orWhere(['group_id' => $this->id, 'permission' => $controller.'/*'])
+            ->orWhere(['group_id' => $this->id, 'permission' => $controller])
+            ->orWhere(['group_id' => $this->id, 'permission' => '*'])
+            ->count());
+        return $data !== 0;
+    }
 }

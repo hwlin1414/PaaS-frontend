@@ -39,7 +39,7 @@ class Jails extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'hostname', 'ip', 'quota', 'enabled', 'enabledby', 'description', 'sshkey'], 'required'],
+            [['user_id', 'hostname', 'ip', 'quota', 'enabled', 'description', 'sshkey'], 'required'],
             [['user_id', 'enabled', 'enabledby'], 'integer'],
             [['created_at', 'enabled_at', 'expired_at'], 'safe'],
             [['hostname', 'quota'], 'string', 'max' => 16],

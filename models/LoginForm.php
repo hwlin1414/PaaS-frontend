@@ -80,7 +80,7 @@ class LoginForm extends Model
                 }
                 return;
             case RADIUS_ACCESS_REJECT:
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError($attribute, '帳號或密碼錯誤');
                 break;
             case RADIUS_ACCESS_CHALLENGE:
                 ServerErrorHttpException('Radius server ask for challenge');

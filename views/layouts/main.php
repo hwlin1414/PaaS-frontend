@@ -18,6 +18,10 @@ $this->registerCss(<<<CSS
     .side-nav a {
         font-size: 16px;
     }
+    h1 {
+        font-size: 3rem;
+        font-family: "微軟正黑體";
+    }
     @media only screen and (min-width : 992px) {
         .footer {
             margin-left: 240px;
@@ -40,7 +44,8 @@ CSS
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
+    <?php /*<title><?= Html::encode($this->title) ?></title>*/ ?>
+    <title>中正資工 PaaS</title>
     <?php $this->head() ?>
 </head>
 <body>
@@ -56,12 +61,26 @@ CSS
     if(Yii::$app->user->isGuest){
         $items[] = ['label' => '登入', 'url' => ['/site/login']];
     }else{
-        $items[] = ['label' => '個人紀錄', 'url' => ['/jails']];
+        $items[] = ['label' => '個人設定', 'url' => ['/self']];
         $items[] = [
             'label' => '登出 (' . Yii::$app->user->identity->name . ')',
             'url' => ['/site/logout'],
             'linkOptions' => ['class' => 'waves-effect logout', 'data-method' => 'POST'],
         ];
+        if(Yii::$app->user->identity->hasPermission('layout', 'management')){
+            $items[] = '<li><div class="divider"></div></li>';
+            //$items[] = '<ul class="collapsible collapsible-accordion"><li>';
+            //$items[] = '<a class="collapsible-header">系統管理</a>';
+            //$items[] = '<div class="collapsible-body"><ul>';
+            $items[] = ['label' => '虛擬平台管理', 'url' => ['/jails']];
+            $items[] = ['label' => 'IP管理', 'url' => ['/ip-pools']];
+            $items[] = ['label' => '帳號管理', 'url' => ['/users']];
+            $items[] = ['label' => '群組管理', 'url' => ['/groups']];
+            $items[] = ['label' => '系統設定', 'url' => ['/configs']];
+            $items[] = ['label' => '系統紀錄', 'url' => ['/logs']];
+            //$items[] = '</ul></div>';
+            //$items[] = '</li></ul>';
+        }
     }
     echo SideNav::widget([
         'options' => ['class' => 'fixed'],

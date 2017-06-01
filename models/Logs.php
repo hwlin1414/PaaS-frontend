@@ -33,8 +33,8 @@ class Logs extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'ip', 'level', 'action', 'description'], 'required'],
             [['user_id'], 'integer'],
+            [['ip', 'level', 'action', 'description'], 'required'],
             [['created_at'], 'safe'],
             [['ip'], 'string', 'max' => 64],
             [['level'], 'string', 'max' => 15],
@@ -51,12 +51,12 @@ class Logs extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'ip' => 'Ip',
-            'level' => 'Level',
-            'action' => 'Action',
-            'description' => 'Description',
-            'created_at' => 'Created At',
+            'user_id' => '使用者',
+            'ip' => 'IP',
+            'level' => '等級',
+            'action' => '動作',
+            'description' => '描述',
+            'created_at' => '時間',
         ];
     }
 

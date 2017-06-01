@@ -15,6 +15,8 @@ use Yii;
  * @property string $authkey
  * @property string $created_at
  *
+ * @property Comments[] $comments
+ * @property Comments[] $comments0
  * @property Jails[] $jails
  * @property Jails[] $jails0
  * @property Logs[] $logs
@@ -65,6 +67,22 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     /**
      * @return \yii\db\ActiveQuery
      */
+    public function getComments()
+    {
+        return $this->hasMany(Comments::className(), ['creator' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getComments0()
+    {
+        return $this->hasMany(Comments::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getJails()
     {
         return $this->hasMany(Jails::className(), ['enabledby' => 'id']);
@@ -93,7 +111,6 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return $this->hasOne(Groups::className(), ['id' => 'group_id']);
     }
-
 
     /**
      * @inheritdoc
@@ -152,9 +169,13 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
      * @param string $password password to validate
      * @return bool if password provided is valid for current user
      */
-    /*
     public function validatePassword($password)
     {
+        //return $this->password === $password;
+        return false;
     }
-    */
+    public function hasPermission($controller, $action)
+    {
+        return $this->group->hasPermission($controller, $action);
+    }
 }
