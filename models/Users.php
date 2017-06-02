@@ -55,12 +55,12 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'amount' => 'Amount',
-            'group_id' => 'Group ID',
-            'enabled' => 'Enabled',
-            'authkey' => 'Authkey',
-            'created_at' => 'Created At',
+            'name' => '帳號',
+            'amount' => '允許數量',
+            'group_id' => '群組',
+            'enabled' => '啟用',
+            'authkey' => '認證識別',
+            'created_at' => '建立日期',
         ];
     }
 

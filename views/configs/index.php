@@ -55,11 +55,11 @@ $this->params['breadcrumbs'][] = $this->title;
         
             <?php $form = ActiveForm::begin(); ?>
 
-            <div class="col m5">
+            <div class="col m4">
                 <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
             </div>
 
-            <div class="col m5">
+            <div class="col m4">
                 <?= $form->field($model, 'value')->textInput(['maxlength' => true]) ?>
             </div>
         

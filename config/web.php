@@ -51,6 +51,12 @@ $config = [
                 'self' => 'users/self',
             ],
         ],
+        'formatter' => [
+            'booleanFormat' => [
+                '<i class="material-icons">clear</i>',
+                '<i class="material-icons">done</i>',
+            ],
+        ],
     ],
     'params' => $params,
 ];

@@ -29,6 +29,7 @@ class IpPools extends \yii\db\ActiveRecord
         return [
             [['ip', 'host'], 'required'],
             [['ip', 'host'], 'string', 'max' => 64],
+            [['ip'], 'ip', 'ipv6' => false],
             [['ip'], 'unique'],
         ];
     }
@@ -40,8 +41,8 @@ class IpPools extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'ip' => 'Ip',
-            'host' => 'Host',
+            'ip' => 'IP',
+            'host' => '主機名稱',
         ];
     }
 }
