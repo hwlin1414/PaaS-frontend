@@ -34,67 +34,21 @@ class GroupPermsController extends Controller
     }
 
     /**
-     * Lists all GroupPerms models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $searchModel = new GroupPermsSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single GroupPerms model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
      * Creates a new GroupPerms model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
-        $model = new GroupPerms();
+        $model = new GroupPerms(['scenario' => 'create']);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        if ($model->load(Yii::$app->request->post())){
+            $model->group_id = $id;
+            if($model->save()) {
+                return $this->redirect(['groups/view', 'id' => $id]);
+            }
         }
-    }
-
-    /**
-     * Updates an existing GroupPerms model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
+        return $this->redirect(['groups/view', 'id' => $id]);
     }
 
     /**
@@ -105,9 +59,11 @@ class GroupPermsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $id = $model->group_id;
+        $model->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['groups/view', 'id' => $id]);
     }
 
     /**

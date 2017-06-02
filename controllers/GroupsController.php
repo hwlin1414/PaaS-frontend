@@ -5,7 +5,9 @@ namespace app\controllers;
 use Yii;
 use app\filters\AccessControl;
 use app\models\Groups;
+use app\models\GroupPerms;
 use app\models\search\GroupsSearch;
+use app\models\search\GroupPermsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -39,12 +41,19 @@ class GroupsController extends Controller
      */
     public function actionIndex()
     {
+        $model = new Groups();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
+
         $searchModel = new GroupsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setSort(['defaultOrder' => ['id' => SORT_ASC]]);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'model' => $model,
         ]);
     }
 
@@ -55,27 +64,19 @@ class GroupsController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $model_perm = new GroupPerms();
+
+        $searchModel = new GroupPermsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->setSort(['defaultOrder' => ['permission' => SORT_ASC]]);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+            'model' => $model,
+            'model_perm' => $model_perm,
         ]);
-    }
-
-    /**
-     * Creates a new Groups model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        $model = new Groups();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
     }
 
     /**

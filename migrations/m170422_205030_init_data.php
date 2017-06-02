@@ -13,6 +13,9 @@ class m170422_205030_init_data extends Migration
         $this->insert('Groups', [
                 'name' => '管理員',
         ]);
+        $this->insert('Groups', [
+                'name' => '使用者',
+        ]);
         $this->insert('GroupPerms', [
                 'group_id' => '1',
                 'permission' => '*'

@@ -43,8 +43,15 @@ class GroupPerms extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'group_id' => 'Group ID',
-            'permission' => 'Permission',
+            'group_id' => '群組',
+            'permission' => '權限',
+        ];
+    }
+
+    public function scenarios()
+    {
+        return [
+            'create' => ['permission'],
         ];
     }
 
