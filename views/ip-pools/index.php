@@ -9,7 +9,7 @@ use macgyer\yii2materializecss\widgets\form\ActiveForm;
 /* @var $searchModel app\models\search\IpPoolsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Ip Pools';
+$this->title = 'IP管理';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="ip-pools-index">
