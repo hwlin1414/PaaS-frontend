@@ -69,6 +69,7 @@ class GroupsController extends Controller
 
         $searchModel = new GroupPermsSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->query->andFilterWhere(['group_id' => $id]);
         $dataProvider->setSort(['defaultOrder' => ['permission' => SORT_ASC]]);
 
         return $this->render('view', [

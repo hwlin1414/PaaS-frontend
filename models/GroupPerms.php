@@ -52,6 +52,7 @@ class GroupPerms extends \yii\db\ActiveRecord
     {
         return [
             'create' => ['permission'],
+            'search' => ['permission'],
         ];
     }
 
