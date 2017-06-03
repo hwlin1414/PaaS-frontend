@@ -22,7 +22,7 @@ class m170422_194303_create_Jails_table extends Migration
             'hostname' => $this->string(16)->notNull(),
             'ip' => $this->string(64)->notNull(),
             'quota' => $this->string(16)->notNull(),
-            'enabled' => $this->boolean()->notNull(),
+            'enabled' => $this->boolean(),
             'enabledby' => $this->integer(),
             'description' => $this->string(255)->notNull(),
             'sshkey' => $this->string(1024)->notNull(),
