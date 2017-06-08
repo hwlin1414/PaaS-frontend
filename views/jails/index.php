@@ -23,21 +23,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
             'id',
-            'user_id',
             'hostname',
+            'user_id',
             'ip',
-            'quota',
+            // 'quota',
             // 'enabled',
             // 'enabledby',
             // 'description',
             // 'sshkey',
             // 'created_at',
-            // 'enabled_at',
-            // 'expired_at',
+            'enabled_at',
+            'expired_at',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            // ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 <?php Pjax::end(); ?></div>

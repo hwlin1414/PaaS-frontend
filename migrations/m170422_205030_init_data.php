@@ -7,8 +7,28 @@ class m170422_205030_init_data extends Migration
     public function up()
     {
         $this->insert('Configs', [
+            'key' => 'defaultUserAmount',
+            'value' => '1',
+        ]);
+        $this->insert('Configs', [
+            'key' => 'defaultUserEnabled',
+            'value' => '1',
+        ]);
+        $this->insert('Configs', [
             'key' => 'defaultUserGroup',
             'value' => '1',
+        ]);
+        $this->insert('Configs', [
+            'key' => 'defaultJailQuota',
+            'value' => '4G',
+        ]);
+        $this->insert('Configs', [
+            'key' => 'defaultJailEnabled',
+            'value' => '0',
+        ]);
+        $this->insert('Configs', [
+            'key' => 'defaultJailExpire',
+            'value' => '90',
         ]);
         $this->insert('Groups', [
                 'name' => '管理員',

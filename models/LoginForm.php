@@ -69,10 +69,10 @@ class LoginForm extends Model
                     $user->name = $this->username;
                     $model = Configs::findOne(['key' => 'defaultUserAmount']);
                     $user->amount = ($model)?($model->value):'1';
-                    $model = Configs::findOne(['key' => 'defaultUserGroup']);
-                    $user->group_id = ($model)?($model->value):'1';
                     $model = Configs::findOne(['key' => 'defaultUserEnable']);
                     $user->enabled = ($model)?($model->value):'1';
+                    $model = Configs::findOne(['key' => 'defaultUserGroup']);
+                    $user->group_id = ($model)?($model->value):'1';
                     $user->authkey = Yii::$app->getSecurity()->generateRandomString(12);
                     $user->created_at = date('Y-m-d H:i:s');
                     $user->validate();
